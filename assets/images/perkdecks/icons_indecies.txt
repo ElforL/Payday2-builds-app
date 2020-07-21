@@ -1,0 +1,12 @@
+Crew Chief:0,1
+Muscle:4,1
+Armorer:0,2
+Rogue:5,2
+Hitman:3,3
+Crook:6,2
+Burglar:2,4
+Infiltrator:7,4
+Sociopath:0,6
+Grinder:4,6
+Yakuza:2,7
+Ex-President:7,7
