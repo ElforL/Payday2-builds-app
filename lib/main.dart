@@ -11,14 +11,6 @@ void main(){
   runApp(MyApp());
 }
 
-class BuildsHelper{
-  static List<Build> builds;
-  static void loadBuilds(){
-
-  }
-}
-
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -27,6 +19,9 @@ class MyApp extends StatelessWidget {
       title: 'Welcome to Flutter',
       theme: ThemeData(
         brightness: Brightness.dark,
+        scaffoldBackgroundColor: Colors.black,
+        primaryColor: Colors.black,
+        accentColor: Colors.blue[800]
       ),
       home: HomePage()
     );
@@ -36,136 +31,90 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    BuildsHelper.loadBuilds();
-    List<Widget> tiles = [
-      ListTile(title: Text('A')),
-      ListTile(title: Text('B')),
-      ListTile(title: Text('C')),
-      ListTile(title: Text('D')),
-      ListTile(title: Text('E')),
-    ];
-    if(BuildsHelper.builds != null)
-      for (var i = 0; i < BuildsHelper.builds.length; i++) {
-      
-      }
-
     return Scaffold(
       appBar: AppBar(
-        title: Text('Your Builds'),
+        title: Text('Your Builds',style: TextStyle(fontSize: 25),),
       ),
-      body: ListView(
-          children: ListTile.divideTiles(context: context, tiles: tiles).toList()
+      body: ListSearch(),
+      floatingActionButton: FloatingActionButton.extended(
+        label: Text("New Build"),
+        icon: Icon(Icons.add),
+        onPressed: (){},
       ),
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-
-            DrawerHeader(
-              child: Center(
-                child: Image.asset('assets/images/logo.png'),
-              ),
-            ),
-
-            ListTile(
-              title: Text("Settings"),
-              trailing: Icon(Icons.settings),
-              onTap: (){
-                Navigator.pop(context);
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context){
-                      return BuildTree(title: 'settings');
-                    }
-                  ,)
-                );
-              },
-            ),
-
-            Divider(),
-
-          ],
-        )
-      )
     );
   }
   
 }
 
-class BuildTree extends StatelessWidget{
-  final String title;
+class ListSearch extends StatefulWidget {
+  @override
+  _ListSearchState createState() => _ListSearchState();
+}
 
-  const BuildTree({Key key, this.title}) : super(key: key);
+class _ListSearchState extends State<ListSearch> {
+
+  List<String> tiles = [];
+  List<String> filteredTiles = new List();
+  
+  @override
+  void initState() {
+    super.initState();
+    tiles = ["Ahmad","Sarah","Bob","Jem","Sarah","Bruh"];
+    filteredTiles = tiles;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.only(left:20, right:20),
+          child: TextField(
+            decoration: InputDecoration(
+              fillColor: Colors.red,
+              contentPadding: EdgeInsets.all(15),
+              hintText: 'Search',
+              focusColor: Colors.blue[900]
+            ),
+            onChanged: (string) {
+                setState(() {
+                  filteredTiles = tiles.where((u) => (u.toLowerCase().contains(string.toLowerCase()))).toList();
+              });
+            },
+          ),
+        ),
+        Expanded(
+          child: ListView.builder(
+            padding: EdgeInsets.all(10),
+            itemCount: filteredTiles.length*2,
+            itemBuilder: (context, i) {
+              if(i.isEven) return SizedBox(height: 10);
+
+              int index = i ~/2 ;
+              return _buildRow(filteredTiles[index]);
+            },
+          ),
+        )
+      ]
+    );
+  }
+
+  Widget _buildRow(String title){
+    return Material(
+      color: Colors.grey[900],
+      borderRadius: BorderRadius.circular(20),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(20),
+        child: Container(
+          child: Padding(
+            padding: EdgeInsets.all(15),
+            child: Text(title),
+          ),
+        ),
+        onTap: (){Scaffold.of(context).showSnackBar(SnackBar(content: Text(title), duration: Duration(milliseconds: 50),));},
+        onLongPress: (){},
       ),
-      body: Column(
-        children: <Widget>[
-          buildGrid(1)
-        ],
-        mainAxisAlignment: MainAxisAlignment.center,
-        
-      )
-      
     );
-  }
-
-  //skip 0 2 4 7 9 11
-  Widget buildGrid(int treeNum){
     
-    List<Column> subtrees = new List<Column>(3);
-    
-    for (var i = 0; i < 3; i++) {
-      List<Widget> containers = new List<Widget>(12);
-      int count = 0;
-      for (var j = 0; j < containers.length; j++) {
-        if(j == 0 || j == 2 || j == 4 || j == 7 || j == 9 || j == 11 )
-          containers[j] = Center();
-        else{
-          count++;
-          containers[11-j] = Container(
-            child: Image.asset('assets/images/skill trees/$treeNum/${i+1}$count.png'),
-
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              gradient: LinearGradient(
-                colors: [
-                  Colors.blue,
-                  Colors.blue[800]
-                ]
-              )
-            ),
-          ); //add
-        }
-      }
-      subtrees[i] = Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            GridView.count(
-              shrinkWrap: true,
-              crossAxisCount: 3,
-              mainAxisSpacing: 5,
-              children: containers,
-            ),
-          ],
-        );
-      
-    }
-
-    GridView tree = GridView.count(
-      shrinkWrap: true,
-      crossAxisCount: 3,
-      crossAxisSpacing: 10,
-      childAspectRatio: .6,
-      children: subtrees,
-    );
-
-
-    return tree;
   }
-
-  
 }
