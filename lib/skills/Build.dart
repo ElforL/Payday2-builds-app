@@ -58,4 +58,33 @@ class Build {
   void load(){
     
   }
+
+  String getExportString(){
+    String string = "";
+    bool commaNeeded = false;
+    List<String> optionsChar = ['a','b','c','d','e','f'];
+
+    for (int i = 0; i < _subtrees.length; i++) {
+      if(_subtrees[i].getSpentPnts() > 0){
+        string += i.toString()+":";
+        for (int j = 0; j < _subtrees[i].getOptions().length; j++) {
+          List<int> options = _subtrees[i].getOptions();
+
+          if (options[j] == 1){
+            string += commaNeeded? ","+optionsChar[j]: optionsChar[j];
+            commaNeeded = true;
+          }else if(options[j] == 2){
+            string += commaNeeded? ","+optionsChar[j].toUpperCase() : optionsChar[j].toUpperCase();
+            commaNeeded = true;
+          }
+            
+        }
+        commaNeeded = false;
+        string += ";";
+      }
+    }
+
+    return string;
+  }
+
 }
