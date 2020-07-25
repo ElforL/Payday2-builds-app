@@ -53,14 +53,14 @@ class ListSearch extends StatefulWidget {
 
 class _ListSearchState extends State<ListSearch> {
 
-  List<String> tiles = [];
-  List<String> filteredTiles = new List();
+  List<String> buildList = [];
+  List<String> filteredBuilds = new List();
   
   @override
   void initState() {
     super.initState();
-    tiles = ["Ahmad","Sarah","Bob","Jem","Sarah","Bruh"];
-    filteredTiles = tiles;
+    buildList = ["Ahmad","Sarah","Bob","Jem","Sarah","Bruh"];
+    filteredBuilds = buildList;
   }
 
   @override
@@ -78,7 +78,7 @@ class _ListSearchState extends State<ListSearch> {
             ),
             onChanged: (string) {
                 setState(() {
-                  filteredTiles = tiles.where((u) => (u.toLowerCase().contains(string.toLowerCase()))).toList();
+                  filteredBuilds = buildList.where((u) => (u.toLowerCase().contains(string.toLowerCase()))).toList();
               });
             },
           ),
@@ -86,12 +86,12 @@ class _ListSearchState extends State<ListSearch> {
         Expanded(
           child: ListView.builder(
             padding: EdgeInsets.all(10),
-            itemCount: filteredTiles.length*2,
+            itemCount: filteredBuilds.length*2,
             itemBuilder: (context, i) {
               if(i.isEven) return SizedBox(height: 10);
 
               int index = i ~/2 ;
-              return _buildRow(filteredTiles[index]);
+              return _buildRow(filteredBuilds[index]);
             },
           ),
         )
