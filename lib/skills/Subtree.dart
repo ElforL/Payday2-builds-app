@@ -79,11 +79,9 @@ class Subtree {
   }
 
   int spentPntsFromTier(int tier){
-    print("tier= $tier");
     var pntsForTiers = [[1,4],[2,6],[3,9],[4,12]];
     int points = 0;
     for (var i = tier * 2 - 1; i < _options.length; i++) {
-      print("i= $i");
       if(_options[i] == 0){continue;}
       points += pntsForTiers[(i+1)~/2][_options[i]-1];
     }
