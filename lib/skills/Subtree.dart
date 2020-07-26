@@ -4,7 +4,7 @@ class Subtree {
 
   Subtree(){
     _spentPnts = 0;
-    _options = new List<int>(6);
+    _options = [0,0,0,0,0,0];
   }
 
   int getSpentPnts(){
@@ -69,7 +69,7 @@ class Subtree {
   }
 
   int getNextUsedTier(int opNum){
-    for (var i = 0; i < _options.length; i++) {
+    for (var i = opNum+1; i < _options.length; i++) {
       if((i+1)/2 == (opNum+1)/2) continue;
       if(_options[i] > 0){
           return (i+1)~/2;
@@ -79,10 +79,12 @@ class Subtree {
   }
 
   int spentPntsFromTier(int tier){
+    print("tier= $tier");
     var pntsForTiers = [[1,4],[2,6],[3,9],[4,12]];
     int points = 0;
     for (var i = tier * 2 - 1; i < _options.length; i++) {
-      if(_options[i] == 0) continue;
+      print("i= $i");
+      if(_options[i] == 0){continue;}
       points += pntsForTiers[(i+1)~/2][_options[i]-1];
     }
     return points;

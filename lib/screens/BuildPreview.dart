@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pd2_builds/skills/Build.dart';
 
-class BuildPreview extends StatelessWidget {
+class BuildPreviewPage extends StatelessWidget {
 
   String buildName;
   Build skillsBuild;

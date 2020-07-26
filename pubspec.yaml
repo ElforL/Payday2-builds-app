@@ -50,11 +50,29 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
+          weight: 400
+        - asset: fonts/Roboto-Bold.ttf
+          weight: 700
+        - asset: fonts/Roboto-Black.ttf
+          weight: 900
+        - asset: fonts/Roboto-Light.ttf
+          weight: 300
+        - asset: fonts/Roboto-Thin.ttf
+          weight: 100
+
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
     - assets/images/skill trees/
     - assets/images/skill trees/1/
+    - assets/images/skill trees/2/
+    - assets/images/skill trees/3/
+    - assets/images/skill trees/4/
+    - assets/images/skill trees/5/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

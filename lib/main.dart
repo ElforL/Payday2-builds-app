@@ -3,15 +3,17 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'skills/Build.dart';
-
-
+import 'package:pd2_builds/skills/Build.dart';
+import 'screens/HomePage.dart';
 
 void main(){
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  
+  static List<Build> myBuilds = new List<Build>();
+
   @override
   Widget build(BuildContext context) {
     
@@ -21,100 +23,11 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Colors.black,
         primaryColor: Colors.black,
-        accentColor: Colors.blue[800]
+        accentColor: Colors.blue[800],
+        fontFamily: 'Roboto',
       ),
-      home: HomePage()
+      home: HomePage(myBuilds)
     );
   }
 }
 
-class HomePage extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Your Builds',style: TextStyle(fontSize: 25),),
-      ),
-      body: ListSearch(),
-      floatingActionButton: FloatingActionButton.extended(
-        label: Text("New Build"),
-        icon: Icon(Icons.add),
-        onPressed: (){},
-      ),
-    );
-  }
-  
-}
-
-class ListSearch extends StatefulWidget {
-  @override
-  _ListSearchState createState() => _ListSearchState();
-}
-
-class _ListSearchState extends State<ListSearch> {
-
-  List<String> buildList = [];
-  List<String> filteredBuilds = new List();
-  
-  @override
-  void initState() {
-    super.initState();
-    buildList = ["Ahmad","Sarah","Bob","Jem","Sarah","Bruh"];
-    filteredBuilds = buildList;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.only(left:20, right:20),
-          child: TextField(
-            decoration: InputDecoration(
-              fillColor: Colors.red,
-              contentPadding: EdgeInsets.all(15),
-              hintText: 'Search',
-              focusColor: Colors.blue[900]
-            ),
-            onChanged: (string) {
-                setState(() {
-                  filteredBuilds = buildList.where((u) => (u.toLowerCase().contains(string.toLowerCase()))).toList();
-              });
-            },
-          ),
-        ),
-        Expanded(
-          child: ListView.builder(
-            padding: EdgeInsets.all(10),
-            itemCount: filteredBuilds.length*2,
-            itemBuilder: (context, i) {
-              if(i.isEven) return SizedBox(height: 10);
-
-              int index = i ~/2 ;
-              return _buildRow(filteredBuilds[index]);
-            },
-          ),
-        )
-      ]
-    );
-  }
-
-  Widget _buildRow(String title){
-    return Material(
-      color: Colors.grey[900],
-      borderRadius: BorderRadius.circular(20),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(20),
-        child: Container(
-          child: Padding(
-            padding: EdgeInsets.all(15),
-            child: Text(title),
-          ),
-        ),
-        onTap: (){Scaffold.of(context).showSnackBar(SnackBar(content: Text(title), duration: Duration(milliseconds: 50),));},
-        onLongPress: (){},
-      ),
-    );
-    
-  }
-}

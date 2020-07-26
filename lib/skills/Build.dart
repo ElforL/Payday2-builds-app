@@ -1,11 +1,13 @@
 import 'package:pd2_builds/skills/Subtree.dart';
 
 class Build {
+  String _title;
   List<Subtree> _subtrees;
   int _spentPnts;
   int _availablePnts;
 
-  Build(){
+  Build(String title){
+    this._title = title;
     _subtrees = new List<Subtree>(15);
     _spentPnts = 0;
     _availablePnts = 120;
@@ -15,6 +17,9 @@ class Build {
     }
   }//close constructor
 
+  String getTitle(){
+    return _title;
+  }
   List<Subtree> getSubTrees(){
     return _subtrees;
   }
@@ -25,13 +30,22 @@ class Build {
     return _availablePnts;
   }
 
+  setTitle(String title) => this._title = title;
+
   bool upgradeOption(int subtreeNum, int opNum){
     bool res = _subtrees[subtreeNum-1].upgradeOption(opNum, _availablePnts);
     calcPoints();
     return res;
   }
 
+  bool degradeOption(int subtreeNum, int opNum){
+    bool res = _subtrees[subtreeNum-1].degradeOption(opNum);
+    calcPoints();
+    return res;
+  }
+
   void calcPoints(){
+    calcTotalSpentPoints();
     _availablePnts = 120 - _spentPnts;
   }
 
