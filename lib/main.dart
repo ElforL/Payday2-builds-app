@@ -3,8 +3,9 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pd2_builds/skills/Build.dart';
-import 'screens/HomePage.dart';
+import 'screens/HomeScreen/HomePage.dart';
 
 void main(){
   runApp(MyApp());
@@ -16,17 +17,28 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    SystemChrome.setPreferredOrientations(
+      [
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown
+      ]
+    );
     return MaterialApp(
       title: 'Welcome to Flutter',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Colors.black,
-        primaryColor: Colors.black,
+        appBarTheme: AppBarTheme(
+          color: Colors.black,
+          elevation: 0,
+        ),
+        textSelectionHandleColor: Colors.blue[100],
         accentColor: Colors.blue[800],
         fontFamily: 'Roboto',
       ),
       home: HomePage(myBuilds)
+      
     );
   }
 }

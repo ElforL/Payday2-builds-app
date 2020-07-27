@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pd2_builds/screens/BuildEdit.dart';
+import 'package:pd2_builds/screens/BuildsSceens/BuildEdit.dart';
+import 'package:pd2_builds/screens/BuildsSceens/BuildPreview.dart';
 import 'package:pd2_builds/skills/Build.dart';
 
 class HomePage extends StatefulWidget{
@@ -18,25 +19,25 @@ class _HomePageState extends State<HomePage> {
 
   List<Build> myBuilds;
   List<Build> filteredBuilds = new List();
+  String filter;
   
   _HomePageState(List<Build> myBuilds){
     this.myBuilds = myBuilds;
-  }
-
-  @override
-  void initState() {
-    super.initState();
     filteredBuilds = myBuilds;
+    filter = "";
   }
 
   @override
   Widget build(BuildContext context) {
+    filteredBuilds = myBuilds.where((u) => (u.getTitle().toLowerCase().contains(filter.toLowerCase()))).toList();
     return Scaffold(
       appBar: AppBar(
         title: Text('Your Builds',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold)),
       ),
       body: Column(
         children: [
+
+          //Search Bar
           Container(
             padding: EdgeInsets.only(left:20, right:20),
             child: TextField(
@@ -47,58 +48,90 @@ class _HomePageState extends State<HomePage> {
               ),
               onChanged: (string) {
                 setState(() {
-                  filteredBuilds = myBuilds.where((u) => (u.getTitle().toLowerCase().contains(string.toLowerCase()))).toList();
+                  filter = string;
               });
               },
             ),
           ),
+
+          //Cards
+          myBuilds.length > 0 ?
           Expanded(
             child: ListView.builder(
               padding: EdgeInsets.all(15),
               itemCount: filteredBuilds.length*2,
               itemBuilder: (context, i) {
-                if(i.isEven) return SizedBox(height: 10);
+                if(i.isEven) return SizedBox(height: 15);
 
                 int index = i ~/2 ;
                 return _buildRow(index);
               },
             ),
-          )
+          ):
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset("assets/images/2.png",
+                  color: Colors.grey[800],
+                ),
+                Text("No Builds",
+                  style: TextStyle(
+                    color: Colors.grey
+                  ), 
+                )
+              ]
+            ),
+          ),
         ]
       ),
       
       floatingActionButton: FloatingActionButton.extended(
         label: Text("New Build"),
         icon: Icon(Icons.add),
-        onPressed: (){
-          Navigator.push(
+        onPressed: () async {
+          await Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => BuildEditPage(new Build("New Build"),myBuilds)),
           );
+          setState(() {
+            
+          });
         },
       ),
     );
   }
 
   Widget _buildRow(int index){
-    return Material(
-      color: Colors.grey[900],
-      borderRadius: BorderRadius.circular(20),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(20),
-        child: Container(
-          child: Padding(
-            padding: EdgeInsets.all(15),
-            child: Text(filteredBuilds[index].getTitle()),
+    return SafeArea(
+      bottom: false,
+      child: Material(
+        color: Colors.grey[900],
+        borderRadius: BorderRadius.circular(15),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(15),
+          child: Container(
+            child: Padding(
+              padding: EdgeInsets.only(right:15, left: 15, top:20, bottom: 20),
+              child: Row(
+                children: <Widget>[
+                  
+                  Text(filteredBuilds[index].getTitle()),
+                ],
+              )
+            ),
           ),
+          onTap: () async{
+            await Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => BuildPreviewPage(myBuilds, myBuilds[index])),
+            );
+            setState(() {
+
+            });
+          },
+          onLongPress: (){},
         ),
-        onTap: (){
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => BuildEditPage(myBuilds[index],myBuilds)),
-          );
-        },
-        onLongPress: (){},
       ),
     );
   }

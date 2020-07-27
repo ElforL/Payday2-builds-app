@@ -7,24 +7,27 @@ class SkillTree extends StatefulWidget {
   
   int treeNum;
   Build curntBuild;
+  bool editable;
 
-  SkillTree(this.treeNum, this.curntBuild);
+  SkillTree(this.treeNum, this.curntBuild, this.editable);
 
   @override
-  _SkillTreeState createState() => _SkillTreeState(treeNum, curntBuild);
+  _SkillTreeState createState() => _SkillTreeState(treeNum, curntBuild, editable);
 }
 
 class _SkillTreeState extends State<SkillTree> {
 
   int treeNum;
   Build curntBuild;
+  bool editable;
 
-  _SkillTreeState(this.treeNum, this.curntBuild);
+  _SkillTreeState(this.treeNum, this.curntBuild, this.editable);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Row(
+    return Column(
+      children: [
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ///////////////////////////// Tree 1 /////////////////////////////
@@ -34,28 +37,28 @@ class _SkillTreeState extends State<SkillTree> {
                   TableRow(
                     children: [
                       Container(),
-                      SkillBtn([treeNum,1,6],curntBuild),
+                      SkillBtn([treeNum,1,6],curntBuild,editable),
                       Container()
                     ]
                   ),
                   TableRow(
                     children: [
-                      SkillBtn([treeNum,1,4],curntBuild),
+                      SkillBtn([treeNum,1,4],curntBuild,editable),
                       Container(),
-                      SkillBtn([treeNum,1,5],curntBuild)
+                      SkillBtn([treeNum,1,5],curntBuild,editable)
                     ]
                   ),
                   TableRow(
                     children: [
-                      SkillBtn([treeNum,1,2],curntBuild),
+                      SkillBtn([treeNum,1,2],curntBuild,editable),
                       Container(),
-                      SkillBtn([treeNum,1,3],curntBuild)
+                      SkillBtn([treeNum,1,3],curntBuild,editable)
                     ]
                   ),
                   TableRow(
                     children: [
                       Container(),
-                      SkillBtn([treeNum,1,1],curntBuild),
+                      SkillBtn([treeNum,1,1],curntBuild,editable),
                       Container()
                     ]
                   ),
@@ -69,28 +72,28 @@ class _SkillTreeState extends State<SkillTree> {
                   TableRow(
                     children: [
                       Container(),
-                      SkillBtn([treeNum,2,6],curntBuild),
+                      SkillBtn([treeNum,2,6],curntBuild,editable),
                       Container()
                     ]
                   ),
                   TableRow(
                     children: [
-                      SkillBtn([treeNum,2,4],curntBuild),
+                      SkillBtn([treeNum,2,4],curntBuild,editable),
                       Container(),
-                      SkillBtn([treeNum,2,5],curntBuild)
+                      SkillBtn([treeNum,2,5],curntBuild,editable)
                     ]
                   ),
                   TableRow(
                     children: [
-                      SkillBtn([treeNum,2,2],curntBuild),
+                      SkillBtn([treeNum,2,2],curntBuild,editable),
                       Container(),
-                      SkillBtn([treeNum,2,3],curntBuild)
+                      SkillBtn([treeNum,2,3],curntBuild,editable)
                     ]
                   ),
                   TableRow(
                     children: [
                       Container(),
-                      SkillBtn([treeNum,2,1],curntBuild),
+                      SkillBtn([treeNum,2,1],curntBuild,editable),
                       Container(),
                     ]
                   ),
@@ -104,28 +107,28 @@ class _SkillTreeState extends State<SkillTree> {
                   TableRow(
                     children: [
                       Container(),
-                      SkillBtn([treeNum,3,6],curntBuild),
+                      SkillBtn([treeNum,3,6],curntBuild,editable),
                       Container()
                     ]
                   ),
                   TableRow(
                     children: [
-                      SkillBtn([treeNum,3,4],curntBuild),
+                      SkillBtn([treeNum,3,4],curntBuild,editable),
                       Container(),
-                      SkillBtn([treeNum,3,5],curntBuild)
+                      SkillBtn([treeNum,3,5],curntBuild,editable)
                     ]
                   ),
                   TableRow(
                     children: [
-                      SkillBtn([treeNum,3,2],curntBuild),
+                      SkillBtn([treeNum,3,2],curntBuild,editable),
                       Container(),
-                      SkillBtn([treeNum,3,3],curntBuild)
+                      SkillBtn([treeNum,3,3],curntBuild,editable)
                     ]
                   ),
                   TableRow(
                     children: [
                       Container(),
-                      SkillBtn([treeNum,3,1],curntBuild),
+                      SkillBtn([treeNum,3,1],curntBuild,editable),
                       Container()
                     ]
                   ),
@@ -135,37 +138,40 @@ class _SkillTreeState extends State<SkillTree> {
 
           ],
         )
+      ] //Coulmn children
     );
   }
 }
 
 class SkillBtn extends StatefulWidget {
+  bool editable;
   List<int> location;
   Build curntBuild;
   
-  SkillBtn(List<int> location, Build curntBuild){
+  SkillBtn(List<int> location, Build curntBuild, this.editable){
     this.location = location;
     this.curntBuild = curntBuild;
   }
 
   @override
-  _SkillBtnState createState() => _SkillBtnState(location, curntBuild);
+  _SkillBtnState createState() => _SkillBtnState(location, curntBuild, editable);
 }
 
 class _SkillBtnState extends State<SkillBtn> {
+  bool editable;
   Build curntBuild;
   List<int> location;
   Image image;
   
-  _SkillBtnState(List<int> location, Build curntBuild){
+  
+  _SkillBtnState(List<int> location, Build curntBuild, this.editable){
     this.curntBuild = curntBuild;
     this.location = location;
     
   }
 
   @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context) {
 
     if(curntBuild.getSubTrees()[((location[0]-1)*3+(location[1]-1))].getOptions()[location[2]-1] == 0){
       image = Image.asset(
@@ -180,12 +186,6 @@ class _SkillBtnState extends State<SkillBtn> {
               color: Colors.blue[800]);
     }
 
-    
-  }
-
-  @override
-  Widget build(BuildContext context) {
-
     return Material(
       color: Colors.transparent,
       borderRadius: BorderRadius.circular(20),
@@ -198,9 +198,9 @@ class _SkillBtnState extends State<SkillBtn> {
             child: image
           ),
         ),
-        onTap: (){
+        onTap: editable?(){
           setState(() {
-            print(curntBuild.upgradeOption(((location[0]-1)*3+(location[1]-1))+1, location[2]-1));
+            curntBuild.upgradeOption(((location[0]-1)*3+(location[1]-1))+1, location[2]-1);
             if(curntBuild.getSubTrees()[((location[0]-1)*3+(location[1]-1))].getOptions()[location[2]-1] == 0){
               image = Image.asset(
                       "assets/images/skill trees/"+location[0].toString()+"/${location[1]}${location[2]}.png",
@@ -215,10 +215,10 @@ class _SkillBtnState extends State<SkillBtn> {
             }  
           });
             
-        },
-        onLongPress: (){
+        }:null, //if the card is not editable it'll return null
+        onLongPress: editable? (){
           setState(() {
-            print(curntBuild.degradeOption(((location[0]-1)*3+(location[1]-1))+1, location[2]-1));
+            curntBuild.degradeOption(((location[0]-1)*3+(location[1]-1))+1, location[2]-1);
             if(curntBuild.getSubTrees()[((location[0]-1)*3+(location[1]-1))].getOptions()[location[2]-1] == 0){
               image = Image.asset(
                       "assets/images/skill trees/"+location[0].toString()+"/${location[1]}${location[2]}.png",
@@ -232,7 +232,7 @@ class _SkillBtnState extends State<SkillBtn> {
                       color: Colors.blue[800]);
             }  
           });
-        },
+        }: null, //if the card is not editable it'll return null
       ),
 
     );

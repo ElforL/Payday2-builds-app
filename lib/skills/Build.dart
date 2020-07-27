@@ -5,18 +5,22 @@ class Build {
   List<Subtree> _subtrees;
   int _spentPnts;
   int _availablePnts;
+  String _perk;
 
   Build(String title){
     this._title = title;
     _subtrees = new List<Subtree>(15);
     _spentPnts = 0;
     _availablePnts = 120;
+    _perk = "Crew Chief";
 
     for (var i = 0; i < _subtrees.length; i++) {
       _subtrees[i] = new Subtree();
     }
   }//close constructor
 
+  String getPerk(){return _perk;}
+  
   String getTitle(){
     return _title;
   }
@@ -28,6 +32,10 @@ class Build {
   }
   int getAvailablePnts(){
     return _availablePnts;
+  }
+
+  void setPerk(String newPerk){
+    this._perk = newPerk;
   }
 
   setTitle(String title) => this._title = title;
@@ -73,6 +81,10 @@ class Build {
     
   }
 
+  void importByString(String string){
+
+  }
+
   String getExportString(){
     String string = "";
     bool commaNeeded = false;
@@ -85,10 +97,12 @@ class Build {
           List<int> options = _subtrees[i].getOptions();
 
           if (options[j] == 1){
-            string += commaNeeded? ","+optionsChar[j]: optionsChar[j];
+            // string += commaNeeded? ","+optionsChar[j]: optionsChar[j];
+            string += optionsChar[j];
             commaNeeded = true;
           }else if(options[j] == 2){
-            string += commaNeeded? ","+optionsChar[j].toUpperCase() : optionsChar[j].toUpperCase();
+            // string += commaNeeded? ","+optionsChar[j].toUpperCase() : optionsChar[j].toUpperCase();
+            string += optionsChar[j].toUpperCase();
             commaNeeded = true;
           }
             

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pd2_builds/main.dart';
-import 'package:pd2_builds/screens/SkillTree.dart';
+import 'package:pd2_builds/screens/BuildsSceens/Components/SkillTree.dart';
 import 'package:pd2_builds/skills/Build.dart';
+
+import 'Components/PerkDeckCard.dart';
+import 'Components/SkillsCard.dart';
 
 class BuildEditPage extends StatefulWidget {
   Build curntBuild;
-  Build tmpBuild;
   List<Build> buildsList;
 
   BuildEditPage(this.curntBuild, this.buildsList);
@@ -19,6 +20,7 @@ class _BuildEditPageState extends State<BuildEditPage> {
   Build curntBuild;
   List<Build> buildsList;
   TextField titleTF;
+  String perkVal;
 
   _BuildEditPageState(Build curntBuild, List<Build> buildList){
     this.buildsList = buildList;
@@ -28,6 +30,7 @@ class _BuildEditPageState extends State<BuildEditPage> {
   @override
   void initState() {
     super.initState();
+    perkVal = curntBuild.getPerk();
     titleTF = TextField(
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(15),
@@ -43,7 +46,18 @@ class _BuildEditPageState extends State<BuildEditPage> {
     return Scaffold(
       //////////////////////////// AppBar ////////////////////////////
       appBar: AppBar(
-        title: titleTF
+        title: titleTF,
+        actions: <Widget>[
+
+          IconButton(
+            padding: EdgeInsets.all(20),
+            icon: Icon(Icons.text_fields),
+            onPressed: (){
+              showImportDialog(context);
+            }
+          )
+
+        ],
       ),
 
       //////////////////////////// Body ////////////////////////////
@@ -51,33 +65,11 @@ class _BuildEditPageState extends State<BuildEditPage> {
         children: <Widget>[
           //////////////////////////// Skills ////////////////////////////
           Expanded(
-            child: DefaultTabController(length: 5, child: 
-                  Scaffold(
-                    body: Column(
-                      children: <Widget>[
-                        TabBar(tabs: [
-                        Tab(text: "Mastermind", icon: Icon(Icons.healing)),
-                        Tab(text: "Enforcer",   icon: Icon(Icons.security)),
-                        Tab(text: "Tech",       icon: Icon(Icons.tap_and_play)),
-                        Tab(text: "Ghost",      icon: Icon(Icons.remove_red_eye) ),
-                        Tab(text: "Fugitive",   icon: Icon(Icons.not_interested)),
-                        ]),
-                        Expanded(
-                          child: TabBarView(
-                            children: [
-                              SkillTree(1,curntBuild),
-                              SkillTree(2,curntBuild),
-                              SkillTree(3,curntBuild),
-                              SkillTree(4,curntBuild),
-                              SkillTree(5,curntBuild),
-                          ],
-                          )
-                        )
-                      ],
-                    )
-                  )
-                )
+            flex: 2,
+            child: SkillsCard(curntBuild: curntBuild)
           ),
+          //////////////////////////// Perk Deck ////////////////////////////
+          Expanded(child: PerkDeckCard(curntBuild,true)),
           //////////////////////////// Save Buttons ////////////////////////////
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -89,7 +81,9 @@ class _BuildEditPageState extends State<BuildEditPage> {
                     side: BorderSide(color: Colors.blue)
                   ),
                   textColor: Colors.blue,
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.pop(context);
+                  },
                   child: Text("Discard")
                 ),
                 SizedBox(width: 100,),
@@ -115,5 +109,64 @@ class _BuildEditPageState extends State<BuildEditPage> {
       ), //end of body
     );
   }
+
+  showImportDialog(BuildContext context) {
+    EdgeInsets padding = EdgeInsets.only(left: 20, right: 20);
+    TextField stringTF = TextField(
+        maxLines: null,
+        controller: TextEditingController(text: curntBuild.getExportString()));
+    // set up the buttons
+    Widget cancelButton = FlatButton(
+      padding: padding,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        side: BorderSide(
+          color: Colors.blue,
+          width: 2
+        ),
+      ),
+      textColor: Colors.blue,
+      child: Text("Cancel"),
+      onPressed:  () {
+        Navigator.pop(context);
+      },
+    );
+
+    Widget importButton = FlatButton(
+      padding: padding,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20)
+      ),
+      color: Colors.blue,
+      textColor: Colors.grey[900],
+      child: Text("Import", style: TextStyle(fontWeight: FontWeight.bold),),
+      onPressed:  () {
+        curntBuild.importByString(stringTF.controller.text);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      backgroundColor: Colors.grey[900],
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20)
+      ),
+      title: Text("String of ${widget.curntBuild.getTitle()}"),
+      content: stringTF,
+      actions: [
+        cancelButton,
+        importButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
 }
 
