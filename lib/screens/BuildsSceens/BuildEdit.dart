@@ -44,6 +44,7 @@ class _BuildEditPageState extends State<BuildEditPage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       //////////////////////////// AppBar ////////////////////////////
       appBar: AppBar(
         title: titleTF,
@@ -68,8 +69,13 @@ class _BuildEditPageState extends State<BuildEditPage> {
             flex: 2,
             child: SkillsCard(curntBuild: curntBuild)
           ),
+
           //////////////////////////// Perk Deck ////////////////////////////
-          Expanded(child: PerkDeckCard(curntBuild,true)),
+          Expanded(
+            child: PerkDeckCard(curntBuild,true),
+          ),
+          
+          
           //////////////////////////// Save Buttons ////////////////////////////
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

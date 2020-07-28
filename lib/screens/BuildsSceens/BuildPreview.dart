@@ -37,7 +37,7 @@ class _BuildPreviewPageState extends State<BuildPreviewPage> {
       body: Column(
         children: <Widget>[
 
-          //////////////////////////// Perk Deck ////////////////////////////
+          //////////////////////////// Skills Card ////////////////////////////
           Expanded(
             flex: 2,
             child: SkillsCard(curntBuild:widget.curntBuild, editable: false),
@@ -165,7 +165,6 @@ class _BuildPreviewPageState extends State<BuildPreviewPage> {
       ),
       color: Colors.red,
       child: Text("Delete",style: TextStyle(fontWeight: FontWeight.bold),),
-      textColor: Colors.grey[900],
       onPressed:  () {
         Navigator.pop(context);
         widget.buildsList.remove(widget.curntBuild);

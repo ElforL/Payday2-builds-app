@@ -87,6 +87,78 @@ class Build {
 
   String getExportString(){
     String string = "";
+    List<bool> treeUsed = [false,false,false,false,false];
+    final treeChar = ['m','e','t','g','f'];
+    final optionsChar = [
+      ['f','d','e','b','c','a'],
+      ['l','j','k','h','i','g'],
+      ['r','p','q','n','o','m']
+    ];
+    final perksNames = 
+      ['Crew Chief',
+      'Muscle',
+      'Armorer',
+      'Rogue',
+      'Hitman',
+      'Crook',
+      'Burglar',
+      'Infiltrator',
+      'Sociopath',
+      'Grinder',
+      'Yakuza',
+      'Ex-President'];
+    final perksChar = 
+      ['C',
+      'M',
+      'A',
+      'R',
+      'H',
+      'O',
+      'B',
+      'I',
+      'S',
+      'N',
+      'Y',
+      'E'];
+
+    //iterate through every subtree
+    for (int i = 0; i < _subtrees.length; i++) {
+      //adds : after trees 
+      if(i % 3 == 0 && i != 0 && treeUsed[(i ~/ 3)-1]) string += ':';
+
+      //if the subtree is empty then skip
+      if(_subtrees[i].getSpentPnts() == 0) continue;
+
+      //checks if the tree already been added to the string (to avoid inserting the treeChar multiple times)
+      // if not: insert the treeChar and set it to used
+      if(!treeUsed[i ~/ 3]){
+        treeUsed[i ~/ 3] = true;
+        string += treeChar[i ~/ 3];
+      }
+
+      for (int j = 0; j < _subtrees[j].getOptions().length; j++) {
+        List<int> options = _subtrees[i].getOptions();
+
+        if (options[j] == 1){
+          string += optionsChar[i % 3][j];
+        }else if(options[j] == 2){
+          string += optionsChar[i % 3][j].toUpperCase();
+        }
+      }
+    }
+
+    //full infamy
+    string += "ibcdea"; 
+
+    //perkdeck
+    string += ":p";      
+    string += perksChar[perksNames.indexOf(_perk)]+"8";
+
+    return string;
+  }
+
+  /* String getExportString(){
+    String string = "";
     bool commaNeeded = false;
     List<String> optionsChar = ['a','b','c','d','e','f'];
 
@@ -113,6 +185,6 @@ class Build {
     }
 
     return string;
-  }
+  } */
 
 }

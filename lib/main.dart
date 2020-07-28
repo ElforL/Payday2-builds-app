@@ -13,7 +13,7 @@ void main(){
 
 class MyApp extends StatelessWidget {
   
-  static List<Build> myBuilds = new List<Build>();
+  static List<Build> buildsList = new List<Build>();
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.blue[800],
         fontFamily: 'Roboto',
       ),
-      home: HomePage(myBuilds)
+      home: HomePage(buildsList)
       
     );
   }
