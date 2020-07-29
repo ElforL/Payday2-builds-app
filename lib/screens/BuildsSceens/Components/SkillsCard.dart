@@ -58,7 +58,7 @@ class SkillsCardState extends State<SkillsCard> {
                 )
               ),
               ///////////////////////////// Points /////////////////////////////
-              /* (widget.editable)? */Expanded(
+              Expanded(
                 child: Container(
                   alignment: Alignment.center,
                   margin: EdgeInsets.all(10),
@@ -70,12 +70,20 @@ class SkillsCardState extends State<SkillsCard> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text("Spent Points: ${widget.curntBuild.getSpentPnts()}"),
-                      Text("Available Points: ${widget.curntBuild.getAvailablePnts()}"),
+                      Text("Spent Points: ${widget.curntBuild.getSpentPnts()}",
+                        style: TextStyle(
+                          color: !widget.editable? Colors.grey[800]: Colors.grey[300]
+                        ),
+                      ),
+                      Text("Available Points: ${widget.curntBuild.getAvailablePnts()}",
+                        style: TextStyle(
+                          color: !widget.editable? Colors.grey[800]: Colors.grey[300]
+                        ),
+                      ),
                     ],
                   ),
                 ),
-              )/* :SizedBox() */
+              )
             ],
           )
         )
