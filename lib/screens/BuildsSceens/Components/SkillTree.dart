@@ -27,120 +27,116 @@ class _SkillTreeState extends State<SkillTree> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ///////////////////////////// Tree 1 /////////////////////////////
-            Expanded(
-              child: Table(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        ///////////////////////////// Tree 1 /////////////////////////////
+        Expanded(
+          child: Table(
+            children: [
+              TableRow(
                 children: [
-                  TableRow(
-                    children: [
-                      Container(),
-                      SkillBtn([treeNum,1,6],curntBuild,editable, widget.parent),
-                      Container()
-                    ]
-                  ),
-                  TableRow(
-                    children: [
-                      SkillBtn([treeNum,1,4],curntBuild,editable, widget.parent),
-                      Container(),
-                      SkillBtn([treeNum,1,5],curntBuild,editable, widget.parent)
-                    ]
-                  ),
-                  TableRow(
-                    children: [
-                      SkillBtn([treeNum,1,2],curntBuild,editable, widget.parent),
-                      Container(),
-                      SkillBtn([treeNum,1,3],curntBuild,editable, widget.parent)
-                    ]
-                  ),
-                  TableRow(
-                    children: [
-                      Container(),
-                      SkillBtn([treeNum,1,1],curntBuild,editable, widget.parent),
-                      Container()
-                    ]
-                  ),
-                ],
-              )
-            ),
-            ///////////////////////////// Tree 2 /////////////////////////////
-            Expanded(
-              child: Table(
+                  Container(),
+                  SkillBtn([treeNum,1,6],curntBuild,editable, widget.parent),
+                  Container()
+                ]
+              ),
+              TableRow(
                 children: [
-                  TableRow(
-                    children: [
-                      Container(),
-                      SkillBtn([treeNum,2,6],curntBuild,editable, widget.parent),
-                      Container()
-                    ]
-                  ),
-                  TableRow(
-                    children: [
-                      SkillBtn([treeNum,2,4],curntBuild,editable, widget.parent),
-                      Container(),
-                      SkillBtn([treeNum,2,5],curntBuild,editable, widget.parent)
-                    ]
-                  ),
-                  TableRow(
-                    children: [
-                      SkillBtn([treeNum,2,2],curntBuild,editable, widget.parent),
-                      Container(),
-                      SkillBtn([treeNum,2,3],curntBuild,editable, widget.parent)
-                    ]
-                  ),
-                  TableRow(
-                    children: [
-                      Container(),
-                      SkillBtn([treeNum,2,1],curntBuild,editable, widget.parent),
-                      Container(),
-                    ]
-                  ),
-                ],
-              )
-            ),
-            ///////////////////////////// Tree 3 /////////////////////////////
-            Expanded(
-              child: Table(
+                  SkillBtn([treeNum,1,4],curntBuild,editable, widget.parent),
+                  Container(),
+                  SkillBtn([treeNum,1,5],curntBuild,editable, widget.parent)
+                ]
+              ),
+              TableRow(
                 children: [
-                  TableRow(
-                    children: [
-                      Container(),
-                      SkillBtn([treeNum,3,6],curntBuild,editable, widget.parent),
-                      Container()
-                    ]
-                  ),
-                  TableRow(
-                    children: [
-                      SkillBtn([treeNum,3,4],curntBuild,editable, widget.parent),
-                      Container(),
-                      SkillBtn([treeNum,3,5],curntBuild,editable, widget.parent)
-                    ]
-                  ),
-                  TableRow(
-                    children: [
-                      SkillBtn([treeNum,3,2],curntBuild,editable, widget.parent),
-                      Container(),
-                      SkillBtn([treeNum,3,3],curntBuild,editable, widget.parent)
-                    ]
-                  ),
-                  TableRow(
-                    children: [
-                      Container(),
-                      SkillBtn([treeNum,3,1],curntBuild,editable, widget.parent),
-                      Container()
-                    ]
-                  ),
-                ],
-              )
-            )
-
-          ],
+                  SkillBtn([treeNum,1,2],curntBuild,editable, widget.parent),
+                  Container(),
+                  SkillBtn([treeNum,1,3],curntBuild,editable, widget.parent)
+                ]
+              ),
+              TableRow(
+                children: [
+                  Container(),
+                  SkillBtn([treeNum,1,1],curntBuild,editable, widget.parent),
+                  Container()
+                ]
+              ),
+            ],
+          )
         ),
-      ] //Coulmn children
+        ///////////////////////////// Tree 2 /////////////////////////////
+        Expanded(
+          child: Table(
+            children: [
+              TableRow(
+                children: [
+                  Container(),
+                  SkillBtn([treeNum,2,6],curntBuild,editable, widget.parent),
+                  Container()
+                ]
+              ),
+              TableRow(
+                children: [
+                  SkillBtn([treeNum,2,4],curntBuild,editable, widget.parent),
+                  Container(),
+                  SkillBtn([treeNum,2,5],curntBuild,editable, widget.parent)
+                ]
+              ),
+              TableRow(
+                children: [
+                  SkillBtn([treeNum,2,2],curntBuild,editable, widget.parent),
+                  Container(),
+                  SkillBtn([treeNum,2,3],curntBuild,editable, widget.parent)
+                ]
+              ),
+              TableRow(
+                children: [
+                  Container(),
+                  SkillBtn([treeNum,2,1],curntBuild,editable, widget.parent),
+                  Container(),
+                ]
+              ),
+            ],
+          )
+        ),
+        ///////////////////////////// Tree 3 /////////////////////////////
+        Expanded(
+          child: Table(
+            children: [
+              TableRow(
+                children: [
+                  Container(),
+                  SkillBtn([treeNum,3,6],curntBuild,editable, widget.parent),
+                  Container()
+                ]
+              ),
+              TableRow(
+                children: [
+                  SkillBtn([treeNum,3,4],curntBuild,editable, widget.parent),
+                  Container(),
+                  SkillBtn([treeNum,3,5],curntBuild,editable, widget.parent)
+                ]
+              ),
+              TableRow(
+                children: [
+                  SkillBtn([treeNum,3,2],curntBuild,editable, widget.parent),
+                  Container(),
+                  SkillBtn([treeNum,3,3],curntBuild,editable, widget.parent)
+                ]
+              ),
+              TableRow(
+                children: [
+                  Container(),
+                  SkillBtn([treeNum,3,1],curntBuild,editable, widget.parent),
+                  Container()
+                ]
+              ),
+            ],
+          )
+        )
+
+      ],
     );
   }
 }
