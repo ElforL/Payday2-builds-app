@@ -7,6 +7,19 @@ class Subtree {
     _options = [0,0,0,0,0,0];
   }
 
+  Subtree.fromJson(Map<String, dynamic> map){
+    _spentPnts = map['spentPnts'];
+    var optionsFromMap = map['options'];
+    _options = new List<int>.from(optionsFromMap);
+  }
+
+  Map<String, dynamic> toJson(){
+    return <String, dynamic>{
+      'spentPnts': _spentPnts,
+      'options': _options
+    };
+  }
+
   int getSpentPnts(){
     return _spentPnts;
   }

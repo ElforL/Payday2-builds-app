@@ -17,7 +17,30 @@ class Build {
     for (var i = 0; i < _subtrees.length; i++) {
       _subtrees[i] = new Subtree();
     }
-  }//close constructor
+  }
+
+  Build.fromJson(Map<String, dynamic> map){
+    _title = map['title'];
+    _spentPnts = map['spentPnts'];
+    _availablePnts = map['availablePnts'];
+    _perk = map['perk'];
+    
+    var subtreesFromMap = map['subtrees'] as List;
+    _subtrees = subtreesFromMap.map((e) => Subtree.fromJson(e)).toList();
+  }
+
+  Map<String, dynamic> toJson(){
+    return <String, dynamic>{
+      'title': _title,
+      'spentPnts': _spentPnts,
+      'availablePnts': _availablePnts,
+      'perk': _perk,
+      'subtrees': [
+        for (var item in _subtrees) 
+          item.toJson()
+      ]
+    };
+  }
 
   String getPerk(){return _perk;}
   
