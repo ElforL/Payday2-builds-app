@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pd2_builds/screens/BuildsSceens/Components/SkillTree.dart';
 import 'package:pd2_builds/skills/Build.dart';
 
 import 'Components/PerkDeckCard.dart';
@@ -18,6 +17,7 @@ class BuildEditPage extends StatefulWidget {
 class _BuildEditPageState extends State<BuildEditPage> {
 
   Build curntBuild;
+  Build cloneBuild;
   List<Build> buildsList;
   TextField titleTF;
   String perkVal;
@@ -25,18 +25,25 @@ class _BuildEditPageState extends State<BuildEditPage> {
   _BuildEditPageState(Build curntBuild, List<Build> buildList){
     this.buildsList = buildList;
     this.curntBuild = curntBuild;
+    // make a clone build so changes won't affect the curnt build
+    // then only when the user press 'Save' copy the changes to the curnt build and go back
+    cloneBuild = new Build(curntBuild.getTitle());
+    this.cloneBuild.clone(curntBuild);
   }
 
   @override
   void initState() {
     super.initState();
-    perkVal = curntBuild.getPerk();
+    //sets the perk selector initial value
+    perkVal = cloneBuild.getPerk();
+
+    //sets the title textfield initial value
     titleTF = TextField(
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(15),
         hintText: 'Build Name',
       ),
-      controller: TextEditingController(text: widget.curntBuild.getTitle()),
+      controller: TextEditingController(text: cloneBuild.getTitle()),
     );
   }
 
@@ -67,12 +74,12 @@ class _BuildEditPageState extends State<BuildEditPage> {
           //////////////////////////// Skills ////////////////////////////
           Expanded(
             flex: 2,
-            child: SkillsCard(curntBuild: curntBuild)
+            child: SkillsCard(curntBuild: cloneBuild)
           ),
 
           //////////////////////////// Perk Deck ////////////////////////////
           Expanded(
-            child: PerkDeckCard(curntBuild,true),
+            child: PerkDeckCard(cloneBuild,true),
           ),
           
           
@@ -80,7 +87,7 @@ class _BuildEditPageState extends State<BuildEditPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-                //Discard
+                ////////// Discard ////////
                 FlatButton(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
@@ -93,7 +100,7 @@ class _BuildEditPageState extends State<BuildEditPage> {
                   child: Text("Discard")
                 ),
                 SizedBox(width: 100,),
-                //Save
+                ////////// Save ////////
                 FlatButton(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
@@ -102,6 +109,7 @@ class _BuildEditPageState extends State<BuildEditPage> {
                   textColor: Colors.black,
                   child: Text("Save"),
                   onPressed: () {
+                    curntBuild.clone(cloneBuild);
                     curntBuild.setTitle(titleTF.controller.text);
                     if(!buildsList.contains(curntBuild)){
                       buildsList.add(curntBuild);
@@ -120,7 +128,7 @@ class _BuildEditPageState extends State<BuildEditPage> {
     EdgeInsets padding = EdgeInsets.only(left: 20, right: 20);
     TextField stringTF = TextField(
         maxLines: null,
-        controller: TextEditingController(text: curntBuild.getExportString()));
+        controller: TextEditingController(text: cloneBuild.getExportString()));
     // set up the buttons
     Widget cancelButton = FlatButton(
       padding: padding,
@@ -147,7 +155,7 @@ class _BuildEditPageState extends State<BuildEditPage> {
       textColor: Colors.grey[900],
       child: Text("Import", style: TextStyle(fontWeight: FontWeight.bold),),
       onPressed:  () {
-        curntBuild.importByString(stringTF.controller.text);
+        cloneBuild.importByString(stringTF.controller.text);
       },
     );
 
@@ -157,7 +165,7 @@ class _BuildEditPageState extends State<BuildEditPage> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20)
       ),
-      title: Text("String of ${widget.curntBuild.getTitle()}"),
+      title: Text("String of ${cloneBuild.getTitle()}"),
       content: stringTF,
       actions: [
         cancelButton,

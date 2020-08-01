@@ -1,3 +1,4 @@
+import 'package:pd2_builds/screens/BuildsSceens/Components/PerkDeckCard.dart';
 import 'package:pd2_builds/skills/Subtree.dart';
 
 class Build {
@@ -19,27 +20,15 @@ class Build {
     }
   }
 
-  Build.fromJson(Map<String, dynamic> map){
-    _title = map['title'];
-    _spentPnts = map['spentPnts'];
-    _availablePnts = map['availablePnts'];
-    _perk = map['perk'];
-    
-    var subtreesFromMap = map['subtrees'] as List;
-    _subtrees = subtreesFromMap.map((e) => Subtree.fromJson(e)).toList();
-  }
-
-  Map<String, dynamic> toJson(){
-    return <String, dynamic>{
-      'title': _title,
-      'spentPnts': _spentPnts,
-      'availablePnts': _availablePnts,
-      'perk': _perk,
-      'subtrees': [
-        for (var item in _subtrees) 
-          item.toJson()
-      ]
-    };
+  void clone(Build source){
+    this._title = source.getTitle();
+    this._spentPnts = source.getSpentPnts();
+    this._availablePnts = source.getAvailablePnts();
+    this._perk = source.getPerk();
+    this._subtrees = new List<Subtree>(15);
+    for (var i = 0; i < this._subtrees.length; i++) {
+      this._subtrees[i] = Subtree.clone(source._subtrees[i]);
+    }
   }
 
   String getPerk(){return _perk;}
@@ -63,6 +52,29 @@ class Build {
 
   setTitle(String title) => this._title = title;
 
+  Build.fromJson(Map<String, dynamic> map){
+    _title = map['title'];
+    _spentPnts = map['spentPnts'];
+    _availablePnts = map['availablePnts'];
+    _perk = map['perk'];
+    
+    var subtreesFromMap = map['subtrees'] as List;
+    _subtrees = subtreesFromMap.map((e) => Subtree.fromJson(e)).toList();
+  }
+
+  Map<String, dynamic> toJson(){
+    return <String, dynamic>{
+      'title': _title,
+      'spentPnts': _spentPnts,
+      'availablePnts': _availablePnts,
+      'perk': _perk,
+      'subtrees': [
+        for (var item in _subtrees) 
+          item.toJson()
+      ]
+    };
+  }
+  
   bool upgradeOption(int subtreeNum, int opNum){
     bool res = _subtrees[subtreeNum-1].upgradeOption(opNum, _availablePnts);
     calcPoints();

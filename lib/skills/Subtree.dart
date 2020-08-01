@@ -7,6 +7,14 @@ class Subtree {
     _options = [0,0,0,0,0,0];
   }
 
+  Subtree.clone(Subtree source){
+    this._spentPnts = source.getSpentPnts();
+    this._options = [0,0,0,0,0,0];
+    for (var i = 0; i < _options.length; i++) {
+      this._options[i] = source._options[i];
+    }
+  }
+
   Subtree.fromJson(Map<String, dynamic> map){
     _spentPnts = map['spentPnts'];
     var optionsFromMap = map['options'];
@@ -32,10 +40,10 @@ class Subtree {
     if(_options[opNum] >= 2) return false;
 
     int opTier = (opNum+1)~/2;
-    if(_spentPnts < getPntsForTier(opTier)) return false;
-    if(getPntsOfOption(opNum, _options[opNum]) > availablePnts) return false;
+    if(_spentPnts < _getPntsForTier(opTier)) return false;
+    if(_getPntsOfOption(opNum, _options[opNum]) > availablePnts) return false;
 
-    _spentPnts += getPntsOfOption(opNum, _options[opNum]);
+    _spentPnts += _getPntsOfOption(opNum, _options[opNum]);
     _options[opNum]++;
 
     return true;
@@ -47,19 +55,19 @@ class Subtree {
     if(_options[opNum] <= 0) return false;
 
     int opTier = (opNum+1)~/2;
-    int nextTier = getNextUsedTier(opNum);
+    int nextTier = _getNextUsedTier(opNum);
 
     if (opTier != nextTier)
-      if((_spentPnts - spentPntsFromTier(nextTier)) - getPntsOfOption(opNum, _options[opNum]-1) < getPntsForTier(nextTier))
+      if((_spentPnts - _spentPntsFromTier(nextTier)) - _getPntsOfOption(opNum, _options[opNum]-1) < _getPntsForTier(nextTier))
         return false;
 
     _options[opNum]--;
-    _spentPnts -= getPntsOfOption(opNum, _options[opNum]);
+    _spentPnts -= _getPntsOfOption(opNum, _options[opNum]);
     
     return true;
   }
 
-  int getPntsForTier(int tier){
+  int _getPntsForTier(int tier){
     switch (tier) {
       case 0: return 0;
       case 1: return 1;
@@ -69,7 +77,7 @@ class Subtree {
     }
   }
 
-  int getPntsOfOption(int opNum, int opStat){
+  int _getPntsOfOption(int opNum, int opStat){
     switch (opNum){
       case 0: if(opStat == 0) return 1; else return 3; break;
       case 1:
@@ -81,7 +89,7 @@ class Subtree {
     }
   }
 
-  int getNextUsedTier(int opNum){
+  int _getNextUsedTier(int opNum){
     for (var i = opNum+1; i < _options.length; i++) {
       if((i+1)/2 == (opNum+1)/2) continue;
       if(_options[i] > 0){
@@ -91,7 +99,7 @@ class Subtree {
     return (opNum+1)~/2;
   }
 
-  int spentPntsFromTier(int tier){
+  int _spentPntsFromTier(int tier){
     var pntsForTiers = [[1,4],[2,6],[3,9],[4,12]];
     int points = 0;
     for (var i = tier * 2 - 1; i < _options.length; i++) {
