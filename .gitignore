@@ -9,6 +9,7 @@
 .history
 .svn/
 changes.txt
+key.properties
 
 # IntelliJ related
 *.iml

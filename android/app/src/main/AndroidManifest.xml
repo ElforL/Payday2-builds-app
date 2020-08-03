@@ -7,7 +7,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="pd2_builds"
+        android:label="Payday2 Builds"
         android:icon="@mipmap/pd2">
         <activity
             android:name=".MainActivity"
