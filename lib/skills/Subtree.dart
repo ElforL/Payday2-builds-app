@@ -27,12 +27,24 @@ class Subtree {
       'options': _options
     };
   }
-
+  
   int getSpentPnts(){
+    calcSpentPoints();
     return _spentPnts;
   }
   List<int> getOptions(){
     return _options;
+  }
+
+  void calcSpentPoints(){
+    int total = 0;
+    final pntsForTiers = [[1,4],[2,6],[3,9],[4,12]];
+
+    for (var i = 0; i < _options.length; i++) {
+      if(_options[i] == 0) continue;
+      total += pntsForTiers[(i+1)~/2][_options[i]-1];
+    }
+    _spentPnts = total;
   }
 
   bool upgradeOption(int opNum, int availablePnts){
@@ -100,7 +112,7 @@ class Subtree {
   }
 
   int _spentPntsFromTier(int tier){
-    var pntsForTiers = [[1,4],[2,6],[3,9],[4,12]];
+    final pntsForTiers = [[1,4],[2,6],[3,9],[4,12]];
     int points = 0;
     for (var i = tier * 2 - 1; i < _options.length; i++) {
       if(_options[i] == 0){continue;}

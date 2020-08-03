@@ -20,7 +20,6 @@ class _BuildEditPageState extends State<BuildEditPage> {
   Build cloneBuild;
   List<Build> buildsList;
   TextField titleTF;
-  String perkVal;
 
   _BuildEditPageState(Build curntBuild, List<Build> buildList){
     this.buildsList = buildList;
@@ -34,8 +33,6 @@ class _BuildEditPageState extends State<BuildEditPage> {
   @override
   void initState() {
     super.initState();
-    //sets the perk selector initial value
-    perkVal = cloneBuild.getPerk();
 
     //sets the title textfield initial value
     titleTF = TextField(
@@ -156,6 +153,10 @@ class _BuildEditPageState extends State<BuildEditPage> {
       child: Text("Import", style: TextStyle(fontWeight: FontWeight.bold),),
       onPressed:  () {
         cloneBuild.importByString(stringTF.controller.text);
+        Navigator.pop(context);
+        setState(() {
+          //refresh page after importing
+        });
       },
     );
 

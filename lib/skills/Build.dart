@@ -1,4 +1,3 @@
-import 'package:pd2_builds/screens/BuildsSceens/Components/PerkDeckCard.dart';
 import 'package:pd2_builds/skills/Subtree.dart';
 
 class Build {
@@ -117,7 +116,72 @@ class Build {
   }
 
   void importByString(String string){
+    List<String> splits = string.split(":");
+    final chars = ['m','e','t','g','f','p'];
+    final optionsChar = [
+      ['f','d','e','b','c','a'],
+      ['l','j','k','h','i','g'],
+      ['r','p','q','n','o','m']
+    ];
+    final perksNames = 
+      ['Crew Chief',
+      'Muscle',
+      'Armorer',
+      'Rogue',
+      'Hitman',
+      'Crook',
+      'Burglar',
+      'Infiltrator',
+      'Sociopath',
+      'Grinder',
+      'Yakuza',
+      'Ex-President'];
+    final perksChar = 
+      ['C',
+      'M',
+      'A',
+      'R',
+      'H',
+      'O',
+      'B',
+      'I',
+      'S',
+      'N',
+      'Y',
+      'E'];
+    
+    
+    for (var i = 0; i < splits.length; i++) {
+      int subIndex, treeIndex = chars.indexOf(splits[i][0]);
+      if(treeIndex == -1) continue;
+      
+      
+      if(splits[i][0] == 'p'){
+        int perkIndx = perksChar.indexOf(splits[i][1]);
+        if(perkIndx == -1) {
+          _perk = "Crew Chief";
+        }else {
+          _perk = perksNames[perkIndx];
+        }
+        continue;
+      }
 
+      // r/badcode :)
+      for (var j = 1; j < splits[i].length; j++) {
+        if(optionsChar[0].contains(splits[i][j].toLowerCase())){
+          subIndex = 0;
+        }else if(optionsChar[1].contains(splits[i][j].toLowerCase())){
+          subIndex = 1;
+        }else if(optionsChar[2].contains(splits[i][j].toLowerCase())){
+          subIndex = 2;
+        }else{
+          continue;
+        }
+        
+        _subtrees[3*treeIndex+subIndex].getOptions()[optionsChar[subIndex].indexOf(splits[i][j].toLowerCase())] = !isUppercase(splits[i][j])? 1: 2;
+      }
+    }
+    calcPoints();
   }
 
   String getExportString(){
@@ -156,6 +220,8 @@ class Build {
       'Y',
       'E'];
 
+    if(getSpentPnts() == 0) return "ibcdea:pC8";
+
     //iterate through every subtree
     for (int i = 0; i < _subtrees.length; i++) {
       //adds : after trees 
@@ -183,6 +249,7 @@ class Build {
     }
 
     //full infamy
+    if(string[string.length-1] != ":") string += ":";
     string += "ibcdea"; 
 
     //perkdeck
@@ -190,6 +257,10 @@ class Build {
     string += perksChar[perksNames.indexOf(_perk)]+"8";
 
     return string;
+  }
+
+  bool isUppercase(String str) {
+    return str == str.toUpperCase();
   }
 
   /* String getExportString(){

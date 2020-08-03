@@ -20,12 +20,12 @@ class _PerkDeckCardState extends State<PerkDeckCard> {
   String perkVal;
   Build curntBuild;
 
-  _PerkDeckCardState(this.curntBuild, this.editable){
-    perkVal = curntBuild.getPerk();
-  }
+  _PerkDeckCardState(this.curntBuild, this.editable);
 
   @override
   Widget build(BuildContext context) {
+    perkVal = curntBuild.getPerk();
+
     return Container(
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(20),
