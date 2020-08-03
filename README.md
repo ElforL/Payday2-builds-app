@@ -1,6 +1,14 @@
 # Payday 2 Builds
 
-an app to make and share payday2 skills builds
+An app to make and share payday2 skills builds.
+
+In the building page, you can upgrade a skill by tapping it and downgrade it by holding.
+The tree points calculations based on an unlocked tier 1 infamy sets which are:
+unlocking the infamy tree, the assassin set, set of the ingenious, the slaughterhouse set, and the set of the corrupted
+min infamy of 5
+
+You can change the build name in the text field on the top of the build page.
+You can import and export builds using the export/import string ( compatible with pd2skills.com ).
 
 # Screenshots
 Builds list:
