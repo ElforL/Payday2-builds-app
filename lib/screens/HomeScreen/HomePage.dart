@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pd2_builds/screens/BuildsSceens/BuildEdit.dart';
 import 'package:pd2_builds/screens/BuildsSceens/BuildPreview.dart';
-import 'package:pd2_builds/screens/BuildsSceens/Components/Icons.dart';
 import 'package:pd2_builds/skills/Build.dart';
+import 'package:pd2_builds/skills/BuildsServices.dart';
 
+// ignore: must_be_immutable
 class HomePage extends StatefulWidget{
   
   List<Build> buildList;
@@ -28,12 +29,34 @@ class _HomePageState extends State<HomePage> {
     filter = "";
   }
 
+  loadBuilds() async{
+    buildList = await BuildsServices.loadBuilds();
+    setState(() {
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadBuilds();
+  }
+
   @override
   Widget build(BuildContext context) {
     filteredBuilds = buildList.where((u) => (u.getTitle().toLowerCase().contains(filter.toLowerCase()))).toList();
     return Scaffold(
       appBar: AppBar(
         title: Text('Your Builds',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold)),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.ac_unit),
+            onPressed: () {
+              /* setState(() {
+                BuildsServices.loadBuilds().then((value) => buildList = value);  
+              }); */
+            },
+          )
+        ],
       ),
       body: Column(
         children: [
@@ -104,64 +127,37 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildRow(int index){
-    return SafeArea(
-      bottom: false,
-      child: Material(
-        color: Colors.grey[900],
+    return Material(
+      color: Colors.grey[900],
+      borderRadius: BorderRadius.circular(10),
+      child: InkWell(
         borderRadius: BorderRadius.circular(10),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(10),
-          child: Container(
-            child: Padding(
-              padding: EdgeInsets.only(right:15, left: 15, top:20, bottom: 20),
-              child: Row(
-                children: <Widget>[
-
-                  Container(
-                    // color: Colors.red,
-                    height: 35,
-                    child: ClipRect(
-                      child: FittedBox(
-                        child: Align(
-                          alignment: Alignment(
-                            //x
-                            (PdIcons.perksLocations[PdIcons.perksNames.indexOf(filteredBuilds[index].getPerk())][0]*(2/7))-1,
-                            //y
-                            (PdIcons.perksLocations[PdIcons.perksNames.indexOf(filteredBuilds[index].getPerk())][1]*(2/7))-1
-                          ),
-                          heightFactor: .125,
-                          widthFactor: .125,
-                          child: Image.asset(
-                            "assets/images/perkdecks/icons_atlas.png"
-                          ),
-                        ),
-                      ),
-                    ),
+        child: Container(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+            // EdgeInsets.only(right:20, left: 20, top:20, bottom: 20),
+            child: Row(
+              children: <Widget>[
+                Text(
+                  filteredBuilds[index].getTitle(),
+                  style: TextStyle(
+                    fontSize: 20,
                   ),
-
-                  SizedBox(width: 20),
-
-                  Text(
-                    filteredBuilds[index].getTitle(),
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                ],
-              )
-            ),
+                ),
+              ],
+            )
           ),
-          onTap: () async{
-            await Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => BuildPreviewPage(buildList, buildList[index])),
-            );
-            setState(() {
-
-            });
-          },
-          onLongPress: (){},
         ),
+        onTap: () async{
+          await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => BuildPreviewPage(buildList, buildList[index])),
+          );
+          setState(() {
+
+          });
+        },
+        onLongPress: (){},
       ),
     );
   }

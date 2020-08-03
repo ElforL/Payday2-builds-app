@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pd2_builds/skills/Build.dart';
+import 'package:pd2_builds/skills/BuildsServices.dart';
 
 import 'Components/PerkDeckCard.dart';
 import 'Components/SkillsCard.dart';
 
+// ignore: must_be_immutable
 class BuildEditPage extends StatefulWidget {
   Build curntBuild;
   List<Build> buildsList;
@@ -111,6 +113,7 @@ class _BuildEditPageState extends State<BuildEditPage> {
                     if(!buildsList.contains(curntBuild)){
                       buildsList.add(curntBuild);
                     }
+                    BuildsServices.writeToFile(buildsList);
                     Navigator.pop(context);
                   },
                 ),

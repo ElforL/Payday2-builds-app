@@ -5,6 +5,7 @@ import 'package:pd2_builds/skills/Build.dart';
 
 import 'Components/PerkDeckCard.dart';
 
+// ignore: must_be_immutable
 class BuildPreviewPage extends StatefulWidget {
 
   List<Build> buildsList;

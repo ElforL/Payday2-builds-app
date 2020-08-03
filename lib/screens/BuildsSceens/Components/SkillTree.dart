@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pd2_builds/screens/BuildsSceens/Components/SkillsCard.dart';
 import 'package:pd2_builds/skills/Build.dart';
 
+// ignore: must_be_immutable
 class SkillTree extends StatefulWidget {
   
   SkillsCardState parent;
@@ -141,6 +142,7 @@ class _SkillTreeState extends State<SkillTree> {
   }
 }
 
+// ignore: must_be_immutable
 class SkillBtn extends StatefulWidget {
   SkillsCardState skillcardstate;
   bool editable;

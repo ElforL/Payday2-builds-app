@@ -15,12 +15,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations(
       [
-        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitUp, 
         DeviceOrientation.portraitDown
       ]
     );
     return MaterialApp(
-      title: 'Welcome to Flutter',
+      title: 'Payday 2 Builds',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,

@@ -182,7 +182,7 @@ class Build {
       }
     }
     calcPoints();
-  }
+  } // importByString
 
   String getExportString(){
     String string = "";
@@ -248,8 +248,10 @@ class Build {
       }
     }
 
-    //full infamy
+    // when the fugitive tree is used there's no : after it and I cbb to fix it in the loop tbh
     if(string[string.length-1] != ":") string += ":";
+
+    //full infamy
     string += "ibcdea"; 
 
     //perkdeck
@@ -257,40 +259,10 @@ class Build {
     string += perksChar[perksNames.indexOf(_perk)]+"8";
 
     return string;
-  }
+  } //getExportString
 
   bool isUppercase(String str) {
     return str == str.toUpperCase();
   }
-
-  /* String getExportString(){
-    String string = "";
-    bool commaNeeded = false;
-    List<String> optionsChar = ['a','b','c','d','e','f'];
-
-    for (int i = 0; i < _subtrees.length; i++) {
-      if(_subtrees[i].getSpentPnts() > 0){
-        string += i.toString()+":";
-        for (int j = 0; j < _subtrees[i].getOptions().length; j++) {
-          List<int> options = _subtrees[i].getOptions();
-
-          if (options[j] == 1){
-            // string += commaNeeded? ","+optionsChar[j]: optionsChar[j];
-            string += optionsChar[j];
-            commaNeeded = true;
-          }else if(options[j] == 2){
-            // string += commaNeeded? ","+optionsChar[j].toUpperCase() : optionsChar[j].toUpperCase();
-            string += optionsChar[j].toUpperCase();
-            commaNeeded = true;
-          }
-            
-        }
-        commaNeeded = false;
-        string += ";";
-      }
-    }
-
-    return string;
-  } */
 
 }

@@ -1,18 +1,48 @@
-import 'dart:convert';  //line 14
+import 'dart:convert';
+import 'dart:io';
 
-import 'package:flutter/services.dart' show rootBundle; //line 9
-import 'package:pd2_builds/skills/Build.dart';
+import 'package:path_provider/path_provider.dart';
+
+import 'Build.dart';
 
 class BuildsServices {
 
-  static Future<String> _loadABuildAsset() async{
-    return await rootBundle.loadString('docs/builds.json');
+  static Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+
+    return directory.path;
+  }
+
+  static Future<File> get _localFile async {
+    final path = await _localPath;
+    return File('$path/builds.json');
+  }
+
+  static Future<File> writeToFile(List<Build> builds) async {
+    final file = await _localFile;
+
+    // Write the file.
+    return file.writeAsString(jsonEncode(builds));
+  }
+  
+  static Future<String> readFile() async {
+    try {
+      final file = await _localFile;
+
+      // Read the file.
+      String contents = await file.readAsString();
+
+      return contents;
+    } catch (e) {
+      // If encountering an error, return null.
+      return null;
+    }
   }
 
   static Future<List<Build>> loadBuilds() async {
-    String jsonString = await _loadABuildAsset();
+    String jsonString = await readFile();
     final jsonResponse = json.decode(jsonString);
-    List<Build> builds = jsonResponse.map((i) => Build.fromJson(i)).toList();
+    List<Build> builds = List<Build>.from(jsonResponse.map((i) => Build.fromJson(i)).toList());
     return builds;
   }
 }

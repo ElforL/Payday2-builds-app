@@ -1,9 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:pd2_builds/screens/BuildsSceens/Components/Icons.dart';
 import 'package:pd2_builds/skills/Build.dart';
 
+// ignore: must_be_immutable
 class PerkDeckCard extends StatefulWidget {
   
   Build curntBuild;
