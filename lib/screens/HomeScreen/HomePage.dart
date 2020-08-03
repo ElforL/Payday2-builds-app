@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pd2_builds/screens/BuildsSceens/BuildEdit.dart';
 import 'package:pd2_builds/screens/BuildsSceens/BuildPreview.dart';
+import 'package:pd2_builds/screens/BuildsSceens/Components/Icons.dart';
 import 'package:pd2_builds/skills/Build.dart';
 import 'package:pd2_builds/skills/BuildsServices.dart';
 
@@ -47,16 +48,6 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Your Builds',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold)),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.ac_unit),
-            onPressed: () {
-              /* setState(() {
-                BuildsServices.loadBuilds().then((value) => buildList = value);  
-              }); */
-            },
-          )
-        ],
       ),
       body: Column(
         children: [
@@ -134,10 +125,33 @@ class _HomePageState extends State<HomePage> {
         borderRadius: BorderRadius.circular(10),
         child: Container(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-            // EdgeInsets.only(right:20, left: 20, top:20, bottom: 20),
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
             child: Row(
               children: <Widget>[
+
+                Container(
+                  height: 35,
+                  child: ClipRect(
+                    child: FittedBox(
+                      child: Align(
+                        alignment: Alignment(
+                          //x
+                          (PdIcons.perksLocations[PdIcons.perksNames.indexOf(filteredBuilds[index].getPerk())][0]*(2/7))-1,
+                          //y
+                          (PdIcons.perksLocations[PdIcons.perksNames.indexOf(filteredBuilds[index].getPerk())][1]*(2/7))-1
+                        ),
+                        heightFactor: .125,
+                        widthFactor: .125,
+                        child: Image.asset(
+                          "assets/images/perkdecks/icons_atlas.png"
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                SizedBox(width: 20),
+
                 Text(
                   filteredBuilds[index].getTitle(),
                   style: TextStyle(
