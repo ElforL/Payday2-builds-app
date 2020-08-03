@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pd2_builds/screens/BuildsSceens/BuildEdit.dart';
 import 'package:pd2_builds/screens/BuildsSceens/Components/SkillsCard.dart';
 import 'package:pd2_builds/skills/Build.dart';
+import 'package:pd2_builds/skills/BuildsServices.dart';
 
 import 'Components/PerkDeckCard.dart';
 
@@ -169,6 +170,7 @@ class _BuildPreviewPageState extends State<BuildPreviewPage> {
       onPressed:  () {
         Navigator.pop(context);
         widget.buildsList.remove(widget.curntBuild);
+        BuildsServices.writeToFile(widget.buildsList);
         Navigator.pop(context);
       },
     );

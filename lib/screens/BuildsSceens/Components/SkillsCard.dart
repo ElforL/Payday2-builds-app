@@ -38,7 +38,7 @@ class SkillsCardState extends State<SkillsCard> {
             TabBar(tabs: [
               Tab(text: "Mastermind", icon: Icon(Icons.healing)),
               Tab(text: "Enforcer",   icon: Icon(Icons.security)),
-              Tab(text: "Tech",       icon: Icon(Icons.tap_and_play)),
+              Tab(text: "Technician",       icon: Icon(Icons.tap_and_play)),
               Tab(text: "Ghost",      icon: Icon(Icons.remove_red_eye) ),
               Tab(text: "Fugitive",   icon: Icon(Icons.not_interested)),
               ]
