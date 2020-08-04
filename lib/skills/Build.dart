@@ -117,14 +117,14 @@ class Build {
 
   void importByString(String string){
     List<String> splits = string.split(":");
-    final chars = ['m','e','t','g','f','p'];
-    final optionsChar = [
+    const chars = ['m','e','t','g','f','p'];
+    const optionsChar = [
       ['f','d','e','b','c','a'],
       ['l','j','k','h','i','g'],
       ['r','p','q','n','o','m']
     ];
-    final perksNames = 
-      ['Crew Chief',
+    const perksNames = [
+      'Crew Chief',
       'Muscle',
       'Armorer',
       'Rogue',
@@ -133,22 +133,42 @@ class Build {
       'Burglar',
       'Infiltrator',
       'Sociopath',
+      'Gambler',
       'Grinder',
       'Yakuza',
-      'Ex-President'];
-    final perksChar = 
-      ['C',
-      'M',
-      'A',
-      'R',
-      'H',
-      'O',
-      'B',
-      'I',
-      'S',
-      'N',
-      'Y',
-      'E'];
+      'Ex-President',//
+      'Maniac',
+      'Anarchist',
+      'Biker',
+      'Kingpin',
+      'Sicario',
+      'Stoic',
+      'Tag Team',
+      'Hacker',
+    ];
+    const perksChar = [
+      'C', // Crew Chief
+      'M', // Muscle
+      'A', // Armorer
+      'R', // Rogue
+      'H', // Hitman
+      'O', // Crook
+      'B', // Burglar
+      'I', // Inflitrator
+      'S', // Sociopath
+      'G', // Gambler
+      'N', // Grinder
+      'Y', // Yakuza
+      'E', // Ex-President
+      '1', // Maniac
+      'T', // Anarchist
+      'K', // Biker
+      'P', // Kingpin
+      '2', // Sicario
+      '3', // Stoic
+      '4', // Tag Team
+      '5', // Hacker
+    ];
     
     
     for (var i = 0; i < splits.length; i++) {
@@ -187,14 +207,14 @@ class Build {
   String getExportString(){
     String string = "";
     List<bool> treeUsed = [false,false,false,false,false];
-    final treeChar = ['m','e','t','g','f'];
-    final optionsChar = [
+    const treeChar = ['m','e','t','g','f'];
+    const optionsChar = [
       ['f','d','e','b','c','a'],
       ['l','j','k','h','i','g'],
       ['r','p','q','n','o','m']
     ];
-    final perksNames = 
-      ['Crew Chief',
+    const perksNames = [
+      'Crew Chief',
       'Muscle',
       'Armorer',
       'Rogue',
@@ -203,22 +223,42 @@ class Build {
       'Burglar',
       'Infiltrator',
       'Sociopath',
+      'Gambler',
       'Grinder',
       'Yakuza',
-      'Ex-President'];
-    final perksChar = 
-      ['C',
-      'M',
-      'A',
-      'R',
-      'H',
-      'O',
-      'B',
-      'I',
-      'S',
-      'N',
-      'Y',
-      'E'];
+      'Ex-President',//
+      'Maniac',
+      'Anarchist',
+      'Biker',
+      'Kingpin',
+      'Sicario',
+      'Stoic',
+      'Tag Team',
+      'Hacker',
+      ];
+    const perksChar = [
+      'C', // Crew Chief
+      'M', // Muscle
+      'A', // Armorer
+      'R', // Rogue
+      'H', // Hitman
+      'O', // Crook
+      'B', // Burglar
+      'I', // Inflitrator
+      'S', // Sociopath
+      'G', // Gambler
+      'N', // Grinder
+      'Y', // Yakuza
+      'E', // Ex-President
+      '1', // Maniac
+      'T', // Anarchist
+      'K', // Biker
+      'P', // Kingpin
+      '2', // Sicario
+      '3', // Stoic
+      '4', // Tag Team
+      '5', // Hacker
+      ];
 
     if(getSpentPnts() == 0) return "ibcdea:pC8";
 

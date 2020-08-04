@@ -75,14 +75,15 @@ class _PerkDeckCardState extends State<PerkDeckCard> {
                 child: Align(
                   alignment: Alignment(
                     //x
-                    (PdIcons.perksLocations[PdIcons.perksNames.indexOf(curntBuild.getPerk())][0]*(2/7))-1,
+                    (PdIcons.perksLocations[PdIcons.perksNames.indexOf(curntBuild.getPerk())][0]*(2/4))-1,
                     //y
-                    (PdIcons.perksLocations[PdIcons.perksNames.indexOf(curntBuild.getPerk())][1]*(2/7))-1
+                    (PdIcons.perksLocations[PdIcons.perksNames.indexOf(curntBuild.getPerk())][1]*(2/21))-1
                   ),
-                  heightFactor: .125,
-                  widthFactor: .125,
+                  heightFactor: 0.045,
+                  widthFactor: 0.2,
                   child: Image.asset(
-                    "assets/images/perkdecks/icons_atlas.png"
+                    "assets/images/perkdecks/icons.png",
+                    color: Colors.white,
                   ),
                 ),
               ),
