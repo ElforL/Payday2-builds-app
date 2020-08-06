@@ -260,7 +260,7 @@ class Build {
       '5', // Hacker
       ];
 
-    if(getSpentPnts() == 0) return "ibcdea:pC8";
+    if(getSpentPnts() == 0) return "ibcdea:p${perksChar[perksNames.indexOf(_perk)]}8";
 
     //iterate through every subtree
     for (int i = 0; i < _subtrees.length; i++) {

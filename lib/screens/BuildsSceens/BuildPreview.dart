@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pd2_builds/constants.dart';
 import 'package:pd2_builds/screens/BuildsSceens/BuildEdit.dart';
 import 'package:pd2_builds/screens/BuildsSceens/Components/SkillsCard.dart';
 import 'package:pd2_builds/skills/Build.dart';
@@ -55,26 +56,29 @@ class _BuildPreviewPageState extends State<BuildPreviewPage> {
               FlatButton(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18.0),
-                  side: BorderSide(color: Colors.red)
+                  side: BorderSide(color: kErrorColor)
                 ),
-                textColor: Colors.red,
+                textColor: kErrorColor,
                 onPressed: (){
                   showDeleteDialog(context);
                   // widget.buildsList.remove(widget.curntBuild);
                   // Navigator.pop(context);
                 },
-                child: Text("Delete")
+                child: Text("DELETE",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                )
               ),
               SizedBox(width: 100,),
               //Save
               FlatButton(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18.0),
-                  side: BorderSide(color: Colors.blue)
+                  side: BorderSide(color: kSecondaryColor)
                 ),
-                color: Colors.black,
-                textColor: Colors.blue,
-                child: Text("Edit"),
+                textColor: kSecondaryColor,
+                child: Text("EDIT",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 onPressed: () async{
                   //Navigator.pop(context);
                   await Navigator.push(
@@ -102,11 +106,11 @@ class _BuildPreviewPageState extends State<BuildPreviewPage> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
         side: BorderSide(
-          color: Colors.blue,
+          color: kSecondaryColor,
           width: 2
         ),
       ),
-      textColor: Colors.blue,
+      textColor: kSecondaryColor,
       child: Text("OK"),
       onPressed:  () {
         Navigator.pop(context);
@@ -115,7 +119,7 @@ class _BuildPreviewPageState extends State<BuildPreviewPage> {
 
     // set up the AlertDialog
     AlertDialog popup = AlertDialog(
-      backgroundColor: Colors.grey[900],
+      backgroundColor: kSurfaceColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20)
       ),
@@ -149,12 +153,14 @@ class _BuildPreviewPageState extends State<BuildPreviewPage> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
         side: BorderSide(
-          color: Colors.blue,
+          color: kSecondaryColor,
           width: 2
         ),
       ),
-      textColor: Colors.blue,
-      child: Text("Cancel"),
+      textColor: kSecondaryColor,
+      child: Text("CANCEL",
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
       onPressed:  () {
         Navigator.pop(context);
       },
@@ -165,8 +171,9 @@ class _BuildPreviewPageState extends State<BuildPreviewPage> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20)
       ),
-      color: Colors.red,
-      child: Text("Delete",style: TextStyle(fontWeight: FontWeight.bold),),
+      color: kErrorColor,
+      textColor: kTextOnError,
+      child: Text("DELETE",style: TextStyle(fontWeight: FontWeight.bold),),
       onPressed:  () {
         Navigator.pop(context);
         widget.buildsList.remove(widget.curntBuild);
@@ -177,7 +184,7 @@ class _BuildPreviewPageState extends State<BuildPreviewPage> {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      backgroundColor: Colors.grey[900],
+      backgroundColor: kSurfaceColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20)
       ),

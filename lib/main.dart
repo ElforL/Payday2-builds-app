@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pd2_builds/constants.dart';
 import 'package:pd2_builds/skills/Build.dart';
 import 'screens/HomeScreen/HomePage.dart';
 
@@ -24,13 +25,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: Colors.black,
+        scaffoldBackgroundColor: kBackgroundColor,
         appBarTheme: AppBarTheme(
-          color: Colors.black,
-          elevation: 0,
+          color: kPrimaryColor,
+          elevation: 3,
         ),
         textSelectionHandleColor: Colors.blue[100],
-        accentColor: Colors.blue[800],
+        primaryColor: kPrimaryColor,
+        accentColor: kSecondaryColor,
         fontFamily: 'Roboto',
       ),
       home: HomePage(buildsList)

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pd2_builds/constants.dart';
 import 'package:pd2_builds/screens/BuildsSceens/Components/Icons.dart';
 import 'package:pd2_builds/skills/Build.dart';
 
@@ -29,7 +30,7 @@ class _PerkDeckCardState extends State<PerkDeckCard> {
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.grey[900],
+        color: kSurfaceColor,
         borderRadius: BorderRadius.circular(20)
       ),
       child: Row(

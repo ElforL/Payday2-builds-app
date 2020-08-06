@@ -180,7 +180,8 @@ class _SkillBtnState extends State<SkillBtn> {
               color: Colors.grey[800],);
     }else if(curntBuild.getSubTrees()[((location[0]-1)*3+(location[1]-1))].getOptions()[location[2]-1] == 1 ){
       image = Image.asset(
-              "assets/images/skill trees/"+location[0].toString()+"/${location[1]}${location[2]}.png");
+              "assets/images/skill trees/"+location[0].toString()+"/${location[1]}${location[2]}.png",
+              color: Colors.white);
     }else if(curntBuild.getSubTrees()[((location[0]-1)*3+(location[1]-1))].getOptions()[location[2]-1] > 1){
       image = Image.asset(
               "assets/images/skill trees/"+location[0].toString()+"/${location[1]}${location[2]}.png",
@@ -208,7 +209,8 @@ class _SkillBtnState extends State<SkillBtn> {
                       color: Colors.grey[800],);
             }else if(curntBuild.getSubTrees()[((location[0]-1)*3+(location[1]-1))].getOptions()[location[2]-1] == 1 ){
               image = Image.asset(
-                      "assets/images/skill trees/"+location[0].toString()+"/${location[1]}${location[2]}.png");
+                      "assets/images/skill trees/"+location[0].toString()+"/${location[1]}${location[2]}.png",
+                      color: Colors.white);
             }else if(curntBuild.getSubTrees()[((location[0]-1)*3+(location[1]-1))].getOptions()[location[2]-1] > 1){
               image = Image.asset(
                       "assets/images/skill trees/"+location[0].toString()+"/${location[1]}${location[2]}.png",

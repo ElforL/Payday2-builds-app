@@ -13,7 +13,7 @@ min infamy of 5
 You can change the build name in the text field on the top of the build page.
 You can import and export builds using the export/import string ( compatible with pd2skills.com ).
 
-NOTE: This app is my first and I did it mainly to learn the Flutter framework, and now that I finished it I'm not going to be working on it as much, so you may find some bugs and problems if you do submit it in the issues section of this repo and I may fix it. or if you're a developer feel free to add your touch and send a pull request :)
+**NOTE: This app is my first and I did it mainly to learn the Flutter framework, and now that I finished it I'm not going to be working on it as much, so you may find some bugs and problems if you do submit it in the issues section of this repo and I may fix it. or if you're a developer feel free to add your touch and send a pull request :)**
 
 # Screenshots
 Builds list:

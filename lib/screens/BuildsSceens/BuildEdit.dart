@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pd2_builds/constants.dart';
 import 'package:pd2_builds/skills/Build.dart';
 import 'package:pd2_builds/skills/BuildsServices.dart';
 
@@ -56,6 +57,7 @@ class _BuildEditPageState extends State<BuildEditPage> {
         title: titleTF,
         actions: <Widget>[
 
+          // import/export string
           IconButton(
             padding: EdgeInsets.all(20),
             icon: Icon(Icons.text_fields),
@@ -90,13 +92,15 @@ class _BuildEditPageState extends State<BuildEditPage> {
                 FlatButton(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.blue)
+                    side: BorderSide(color: kSecondaryColor)
                   ),
-                  textColor: Colors.blue,
+                  textColor: kSecondaryColor,
                   onPressed: (){
                     Navigator.pop(context);
                   },
-                  child: Text("Discard")
+                  child: Text("DISCARD",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  )
                 ),
                 SizedBox(width: 100,),
                 ////////// Save ////////
@@ -104,9 +108,11 @@ class _BuildEditPageState extends State<BuildEditPage> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
                   ),
-                  color: Colors.blue,
-                  textColor: Colors.black,
-                  child: Text("Save"),
+                  color: kSecondaryColor,
+                  textColor: kTextOnSecondary,
+                  child: Text("SAVE",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                   onPressed: () {
                     curntBuild.clone(cloneBuild);
                     curntBuild.setTitle(titleTF.controller.text);
@@ -127,33 +133,39 @@ class _BuildEditPageState extends State<BuildEditPage> {
   showImportDialog(BuildContext context) {
     EdgeInsets padding = EdgeInsets.only(left: 20, right: 20);
     TextField stringTF = TextField(
-        maxLines: null,
-        controller: TextEditingController(text: cloneBuild.getExportString()));
-    // set up the buttons
+      maxLines: null,
+      controller: TextEditingController(text: cloneBuild.getExportString())
+    );
+
+    //// Set up the buttons
+    // Cancel button
     Widget cancelButton = FlatButton(
       padding: padding,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
         side: BorderSide(
-          color: Colors.blue,
+          color: kSecondaryColor,
           width: 2
         ),
       ),
-      textColor: Colors.blue,
-      child: Text("Cancel"),
+      textColor: kSecondaryColor,
+      child: Text("CANCEL",
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
       onPressed:  () {
         Navigator.pop(context);
       },
     );
 
+    // Import button
     Widget importButton = FlatButton(
       padding: padding,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20)
       ),
-      color: Colors.blue,
-      textColor: Colors.grey[900],
-      child: Text("Import", style: TextStyle(fontWeight: FontWeight.bold),),
+      color: kSecondaryColor,
+      textColor: kTextOnSecondary,
+      child: Text("IMPORT", style: TextStyle(fontWeight: FontWeight.bold),),
       onPressed:  () {
         cloneBuild.importByString(stringTF.controller.text);
         Navigator.pop(context);
@@ -165,7 +177,7 @@ class _BuildEditPageState extends State<BuildEditPage> {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      backgroundColor: Colors.grey[900],
+      backgroundColor: kSurfaceColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20)
       ),

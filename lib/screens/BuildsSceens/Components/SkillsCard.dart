@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pd2_builds/constants.dart';
 import 'package:pd2_builds/skills/Build.dart';
 
 import 'SkillTree.dart';
@@ -27,7 +28,7 @@ class SkillsCardState extends State<SkillsCard> {
     return Container(
       margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Colors.grey[900],
+        color: kSurfaceColor,
         borderRadius: BorderRadius.circular(20)
       ),
       child: DefaultTabController(
@@ -61,7 +62,7 @@ class SkillsCardState extends State<SkillsCard> {
               margin: EdgeInsets.all(10),
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Colors.grey[900],
+                color: kSurfaceColor,
                 borderRadius: BorderRadius.circular(20)
               ),
               child: Column(
