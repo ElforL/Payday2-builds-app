@@ -27,8 +27,8 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         scaffoldBackgroundColor: kBackgroundColor,
         appBarTheme: AppBarTheme(
-          color: kPrimaryColor,
-          elevation: 3,
+          color: kBackgroundColor,
+          elevation: 0
         ),
         textSelectionHandleColor: Colors.blue[100],
         primaryColor: kPrimaryColor,

@@ -43,10 +43,16 @@ class _BuildPreviewPageState extends State<BuildPreviewPage> {
           //////////////////////////// Skills Card ////////////////////////////
           Expanded(
             flex: 2,
-            child: SkillsCard(curntBuild:widget.curntBuild, editable: false),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: SkillsCard(curntBuild:widget.curntBuild, editable: false),
+            ),
           ),
           //////////////////////////// Perk Deck ////////////////////////////
-          Expanded(child: PerkDeckCard(widget.curntBuild,false)),
+          Expanded(child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: PerkDeckCard(widget.curntBuild,false),
+          )),
 
           //////////////////////////// Edit/Del Buttons ////////////////////////////
           Row(

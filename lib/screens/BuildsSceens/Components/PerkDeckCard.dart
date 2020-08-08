@@ -26,72 +26,72 @@ class _PerkDeckCardState extends State<PerkDeckCard> {
   Widget build(BuildContext context) {
     perkVal = curntBuild.getPerk();
 
-    return Container(
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: kSurfaceColor,
-        borderRadius: BorderRadius.circular(20)
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
+    return Material(
+      elevation: 3,
+      color: kSurfaceColor,
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        padding: EdgeInsets.all(20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
 
-          editable?
-          DropdownButton<String>(
-            value: perkVal,
-            elevation: 1,
-            onChanged: (String newPerk) {
-              setState(() {
-                perkVal = newPerk;
-                curntBuild.setPerk(perkVal);
-              });
-            },
-            items: PdIcons.perksNames.map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList()
-          ):
-          Text(
-            curntBuild.getPerk(),
-            style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold
+            editable?
+            DropdownButton<String>(
+              value: perkVal,
+              elevation: 1,
+              onChanged: (String newPerk) {
+                setState(() {
+                  perkVal = newPerk;
+                  curntBuild.setPerk(perkVal);
+                });
+              },
+              items: PdIcons.perksNames.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList()
+            ):
+            Text(
+              curntBuild.getPerk(),
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold
+              ),
             ),
-          ),
 
-          //Spaced
-          SizedBox(
-            width: 20,
-          ),
+            //Spaced
+            SizedBox(
+              width: 20,
+            ),
 
-          //Perk Icon
-          Container(
-            height: 75,
-            width: 75,
-            child: ClipRect(
-              child: FittedBox(
-                child: Align(
-                  alignment: Alignment(
-                    //x
-                    (PdIcons.perksLocations[PdIcons.perksNames.indexOf(curntBuild.getPerk())][0]*(2/4))-1,
-                    //y
-                    (PdIcons.perksLocations[PdIcons.perksNames.indexOf(curntBuild.getPerk())][1]*(2/21))-1
-                  ),
-                  heightFactor: 0.045,
-                  widthFactor: 0.2,
-                  child: Image.asset(
-                    "assets/images/perkdecks/icons.png",
-                    color: Colors.white,
+            //Perk Icon
+            Container(
+              height: 75,
+              width: 75,
+              child: ClipRect(
+                child: FittedBox(
+                  child: Align(
+                    alignment: Alignment(
+                      //x
+                      (PdIcons.perksLocations[PdIcons.perksNames.indexOf(curntBuild.getPerk())][0]*(2/4))-1,
+                      //y
+                      (PdIcons.perksLocations[PdIcons.perksNames.indexOf(curntBuild.getPerk())][1]*(2/21))-1
+                    ),
+                    heightFactor: 0.045,
+                    widthFactor: 0.2,
+                    child: Image.asset(
+                      "assets/images/perkdecks/icons.png",
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
 
-        ],
+          ],
+        ),
       ),
     );
   }

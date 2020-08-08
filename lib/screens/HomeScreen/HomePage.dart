@@ -132,6 +132,7 @@ class _HomePageState extends State<HomePage> {
   Widget _buildRow(int index){
     
     return Material(
+      elevation: 3,
       color: kSurfaceColor,
       borderRadius: BorderRadius.circular(10),
       child: InkWell(

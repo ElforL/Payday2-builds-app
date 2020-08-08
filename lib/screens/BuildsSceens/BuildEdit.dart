@@ -75,12 +75,18 @@ class _BuildEditPageState extends State<BuildEditPage> {
           //////////////////////////// Skills ////////////////////////////
           Expanded(
             flex: 2,
-            child: SkillsCard(curntBuild: cloneBuild)
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: SkillsCard(curntBuild: cloneBuild),
+            )
           ),
 
           //////////////////////////// Perk Deck ////////////////////////////
           Expanded(
-            child: PerkDeckCard(cloneBuild,true),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: PerkDeckCard(cloneBuild,true),
+            ),
           ),
           
           
